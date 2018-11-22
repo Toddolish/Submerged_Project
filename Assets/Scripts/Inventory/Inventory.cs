@@ -19,6 +19,31 @@ public class Inventory : MonoBehaviour
 		}
 	}
 
+	public int MyTotalSlotCount
+	{
+		get
+		{
+			int count = 0;
+
+			foreach (Bag bag in bags)
+			{
+				count += bag.MyBagScript.MySlots.Count;
+			}
+
+			return count;
+		}
+	}
+
+	public int MyFullSlotCount
+	{
+		get
+		{
+			return MyTotalSlotCount - MyTotalSlotCount;
+		}
+	}
+
+	private SlotScript fromSlot;
+
 	private List<Bag> bags = new List<Bag>();
 
 	[SerializeField]
@@ -33,6 +58,38 @@ public class Inventory : MonoBehaviour
 		get { return bags.Count < 5; }
 	}
 
+	public int MyEmptySlotCount
+	{
+		get
+		{
+			int count = 0;
+
+			foreach (Bag bag in bags)
+			{
+				count += bag.MyBagScript.MyEmptySlotCount;
+			}
+
+			return count;
+		}
+	}
+
+	public SlotScript FromSlot
+	{
+		get
+		{
+			return fromSlot;
+		}
+
+		set
+		{
+			fromSlot = value;
+			if (value != null)
+			{
+				fromSlot.MyIcon.color = Color.grey;
+			}
+		}
+	}
+
 	private void Awake()
 	{
 		Bag bag = (Bag)Instantiate(items[0]);
@@ -42,12 +99,6 @@ public class Inventory : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			Bag bag = (Bag)Instantiate(items[0]);
-			bag.Initialize(16);
-			bag.Use();
-		}
 		if (Input.GetKeyDown(KeyCode.B))
 		{
 			Inventory.MyInstance.OpenClose();
@@ -59,9 +110,21 @@ public class Inventory : MonoBehaviour
 			bag.Initialize(16);
 			AddItem(bag);
 		}
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			Bag bag = (Bag)Instantiate(items[0]);
+			bag.Initialize(8);
+			AddItem(bag);
+		}
 		if (Input.GetKeyDown(KeyCode.L))
 		{
 			HealthPotion potion = (HealthPotion)Instantiate(items[1]);
+			AddItem(potion);
+		}
+
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			LightPotion potion = (LightPotion)Instantiate(items[2]);
 			AddItem(potion);
 		}
 	}
@@ -74,21 +137,93 @@ public class Inventory : MonoBehaviour
 			{
 				bagButton.MyBag = bag;
 				bags.Add(bag);
+				bag.MyBagButton = bagButton;
 				break; // Only want to do this for one bag not for all the others
 			}
 		}
 	}
 
+	public void AddBag(Bag bag, BagButton bagButton)
+	{
+		bags.Add(bag);
+		bagButton.MyBag = bag;
+	}
+
+	public void RemoveBag(Bag bag)
+	{
+		bags.Remove(bag);
+		Destroy(bag.MyBagScript.gameObject);
+	}
+
+	public void SwapBags(Bag oldBag, Bag newBag)
+	{
+		int newSlotCount = (MyTotalSlotCount - oldBag.Slots) + newBag.Slots;
+
+		if (newSlotCount - MyFullSlotCount >= 0)
+		{
+			// Do Swap
+			List<Item> bagItems = oldBag.MyBagScript.GetItems();
+
+			RemoveBag(oldBag);
+
+			newBag.MyBagButton = oldBag.MyBagButton;
+
+			newBag.Use();
+
+			foreach (Item item in bagItems)
+			{
+				if (item != newBag) // To make sure there is no Dulpicates
+				{
+					AddItem(item);
+				}
+			}
+
+			AddItem(oldBag);
+
+			HandScript.MyInstance.Drop();
+
+			MyInstance.fromSlot = null;
+		}
+	}
+
 	public void AddItem(Item item)
 	{
+		if (item.MyStackSize > 0)
+		{
+			if (PlaceInStack(item))
+			{
+				return;
+			}
+		}
+
+		PlaceInEmpty(item);
+	}
+
+	private void PlaceInEmpty(Item item)
+	{
 		foreach (Bag bag in bags)
-		{ 
-			// Check that it can add a bag
+		{
 			if (bag.MyBagScript.AddItem(item))
 			{
 				return;
 			}
 		}
+	}
+
+	private bool PlaceInStack(Item item)
+	{
+		foreach (Bag bag in bags)
+		{
+			foreach (SlotScript slots in bag.MyBagScript.MySlots)
+			{
+				if (slots.StackItem(item))
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public void OpenClose()

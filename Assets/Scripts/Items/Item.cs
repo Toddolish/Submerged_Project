@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+public enum Quality {Common, Uncommon, Rare, Epic }
+
+public abstract class Item : ScriptableObject, IMoveable, IDescribable
 {
 	[SerializeField]
 	private Sprite icon;
 
 	[SerializeField]
 	private int stackSize;
+
+	[SerializeField]
+	private string title;
+
+	[SerializeField]
+	private Quality quality;
 
 	private SlotScript slot;
 
@@ -20,7 +28,7 @@ public abstract class Item : ScriptableObject
 		}
 	}
 
-	public int StackSize
+	public int MyStackSize
 	{
 		get
 		{
@@ -39,6 +47,32 @@ public abstract class Item : ScriptableObject
 		{
 			slot = value;
 		}
+	}
+
+	public virtual string GetDescription()
+	{
+		string color = string.Empty;
+
+		switch (quality)
+		{
+			case Quality.Common:
+				color = "#d6d6d7";
+				break;
+
+			case Quality.Uncommon:
+				color = "#00ff00ff";
+				break;
+
+			case Quality.Rare:
+				color = "#0000ffff";
+				break;
+
+			case Quality.Epic:
+				color = "#800080ff";
+				break;
+		}
+
+		return string.Format("<color={0}> {1}</color>", color, title);
 	}
 
 	public void Remove()

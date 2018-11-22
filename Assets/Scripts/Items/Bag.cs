@@ -13,6 +13,8 @@ public class Bag : Item, IUseable
 
 	public BagScript MyBagScript { get; set; }
 
+	public BagButton MyBagButton { get; set; }
+
 	public int Slots
 	{
 		get
@@ -30,12 +32,24 @@ public class Bag : Item, IUseable
 	{
 		if (Inventory.MyInstance.CanAddBag)
 		{
+			Remove();
 			MyBagScript = Instantiate(bagPrefab, Inventory.MyInstance.transform).GetComponent<BagScript>();
 			MyBagScript.AddSlots(slots);
 
-			Inventory.MyInstance.AddBag(this);
+			if (MyBagButton == null)
+			{
+				Inventory.MyInstance.AddBag(this);
+			}
 
-			Remove();
+			else
+			{
+				Inventory.MyInstance.AddBag(this, MyBagButton);
+			}
 		}
+	}
+
+	public override string GetDescription()
+	{
+		return base.GetDescription() + string.Format("\n {0} slot bag", slots);
 	}
 }
