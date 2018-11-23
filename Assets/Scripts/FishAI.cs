@@ -30,11 +30,14 @@ public class FishAI : MonoBehaviour
     public GameObject[] Meats;
     int Burst = 5;
 
+    //Attack
+    public int attackDamage = 10;
+
     private void Start()
     {
         //PlayerScript = GameObject.Find("Player").GetComponent<Submarine>();
-
-        myRb = gameObject.transform.GetChild(0).GetComponent<Rigidbody2D>();
+        target = GameObject.Find("Submarine").GetComponent<Transform>();
+        myRb = gameObject.transform.GetComponent<Rigidbody2D>();
         myTransform = gameObject.GetComponent<Transform>();
         myAnim = transform.GetChild(0).GetComponent<Animator>();
 
@@ -43,6 +46,10 @@ public class FishAI : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            curHealth = 0;
+        }
         Explode();
         ForwardMovement();
     }
@@ -70,6 +77,10 @@ public class FishAI : MonoBehaviour
             {
                 // speed up movement when fish is to far away from player
                 //myRb.velocity = (new Vector3(MovementSpeed * 1, 0, 0));
+            }
+            if (dist < 2)
+            {
+                myAnim.SetTrigger("bite");
             }
         }
     }
@@ -130,4 +141,5 @@ public class FishAI : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 }

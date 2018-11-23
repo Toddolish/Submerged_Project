@@ -12,6 +12,7 @@ TagManager:
   - hpp
   - sm
   - ss
+  - lp
   layers:
   - Default
   - TransparentFX

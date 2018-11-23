@@ -64,7 +64,15 @@ public class HandScript : MonoBehaviour
 
 			Drop();
 
-			Inventory.MyInstance.FromSlot = null;
+            #region SpawnItemPrefabs
+            // Once item is deleted from inventory spawn the prefab in the world
+            //if (MyMoveable.MyIcon.name == "hpp")
+            //{
+            //    Instantiate(Inventory.MyInstance.healthPotion, transform.position, transform.rotation);
+            //}
+            #endregion
+
+            Inventory.MyInstance.FromSlot = null;
 		}
 	}
 }

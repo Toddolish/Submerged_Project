@@ -5,6 +5,22 @@ using UnityEngine.UI;
 
 public class PlayerCTRL : MonoBehaviour
 {
+    #region Singleton
+    public static PlayerCTRL instance;
+
+    public static PlayerCTRL MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<PlayerCTRL>();
+            }
+
+            return instance;
+        }
+    }
+    #endregion
     #region Sub_Vehicle
     public Camera cam;
     public float forwardSpeed = 10;
@@ -34,9 +50,14 @@ public class PlayerCTRL : MonoBehaviour
     PlayerStats StatsScript;
 
     //text
-    //public Text ToggleLights;
+    public Light areaLight;
     #endregion
 
+    #region Special
+    // Light Potion
+    float lightTimer = 10;
+    public bool specialLights;
+    #endregion
     void Start()
     {
         subCollider = GetComponent<Collider2D>();
@@ -47,16 +68,17 @@ public class PlayerCTRL : MonoBehaviour
         myrb = gameObject.GetComponent<Rigidbody2D>();
         SubTransform = GetComponent<Transform>();
         #endregion
-
-        //Text
-        //ToggleLights.GetComponent<Text>();
-
+        
         //scripts
         thisScript = GetComponent<PlayerCTRL>();
-
+    }
+    private void Update()
+    {
+        SpecialLight();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        #region AddItems
         // Pickup items and add them to inventory
         if (collision.tag == "hpp")
         {
@@ -76,8 +98,14 @@ public class PlayerCTRL : MonoBehaviour
             // spawn item of tag into bag
             Inventory.MyInstance.AddSoftMeat();
         }
+        if (collision.tag == "lp")
+        {
+            Destroy(collision.gameObject);
+            // spawn item of tag into bag
+            Inventory.MyInstance.AddLightPotion();
+        }
+        #endregion
     }
-
     void FixedUpdate()
     {
         //ToggleLights.enabled = true;
@@ -138,5 +166,24 @@ public class PlayerCTRL : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed * Time.deltaTime);
+    }
+
+    public void SpecialLight()
+    {
+        if (specialLights)
+        {
+            areaLight.range = 50;
+            lightTimer -= Time.deltaTime;
+
+            if (lightTimer <= 0)
+            {
+                specialLights = false;
+                lightTimer = 30;
+            }
+        }
+        else
+        {
+            areaLight.range = 8;
+        }
     }
 }

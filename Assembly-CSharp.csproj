@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\CamFollow.cs" />
     <Compile Include="Assets\Scripts\EarthQuake.cs" />
     <Compile Include="Assets\Scripts\FishAI.cs" />
+    <Compile Include="Assets\Scripts\FishHelper.cs" />
     <Compile Include="Assets\Scripts\Inventory\BagScript.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\SlotScript.cs" />
@@ -81,10 +82,13 @@
     <Compile Include="Assets\Scripts\Items\Misc.cs" />
     <Compile Include="Assets\Scripts\PlayerCTRL.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Spawner\WaveSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\HandScript.cs" />
     <Compile Include="Assets\Scripts\UI\IDescribable.cs" />
     <Compile Include="Assets\Scripts\UI\ObservableStack.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Weapon.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/todd.weiss2/Desktop/Submerged_Project/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

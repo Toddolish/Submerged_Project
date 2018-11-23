@@ -9,12 +9,12 @@ public class LightPotion : Item, IUseable
 	public int Seconds;
 	public void Use()
 	{
-		//if (Player.MyInstance.curHealth < Player.MyInstance.maxHealth)
-		//{
-			//Remove();
+		if (PlayerCTRL.MyInstance.specialLights == false)
+		{
+			Remove();
 
-			//Player.MyInstance.curHealth += health;
-		//}
+            PlayerCTRL.MyInstance.specialLights = true;
+        }
 	}
 
 	public override string GetDescription()

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-	public static PlayerStats instance;
+    #region Singleton
+    public static PlayerStats instance;
 
 	public static PlayerStats MyInstance
 	{
@@ -18,19 +20,27 @@ public class PlayerStats : MonoBehaviour
 			return instance;
 		}
 	}
-
-	public float curHealth;
+    #endregion
+    public float curHealth;
 	public float maxHealth = 100;
+    public Image hp_Bar;
 	void Start()
 	{
 		curHealth = maxHealth;
-	}
+        //hp_Bar = GetComponent<Image>();
+    }
 	
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+        hp_Bar.fillAmount = curHealth / 100;
+
+        if (Input.GetKeyDown(KeyCode.Space))
 		{
 			curHealth -= 10;
 		}
 	}
+    public void TakeDamage(int damage)
+    {
+        curHealth -= damage;
+    }
 }

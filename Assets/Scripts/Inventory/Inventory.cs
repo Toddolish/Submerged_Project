@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-	public static Inventory instance;
+    #region Items to Spawn
+    public GameObject healthPotion;
+    #endregion
+    #region Singleton
+    public static Inventory instance;
 
 	public static Inventory MyInstance
 	{
@@ -18,8 +22,8 @@ public class Inventory : MonoBehaviour
 			return instance;
 		}
 	}
-
-	public int MyTotalSlotCount
+    #endregion
+    public int MyTotalSlotCount
 	{
 		get
 		{
@@ -99,28 +103,9 @@ public class Inventory : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.B))
+		if (Input.GetKeyDown(KeyCode.I))
 		{
 			Inventory.MyInstance.OpenClose();
-		}
-
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			Bag bag = (Bag)Instantiate(items[0]);
-			bag.Initialize(16);
-			AddItem(bag);
-		}
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			Bag bag = (Bag)Instantiate(items[0]);
-			bag.Initialize(8);
-			AddItem(bag);
-		}
-
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			LightPotion potion = (LightPotion)Instantiate(items[2]);
-			AddItem(potion);
 		}
 	}
 
@@ -242,11 +227,20 @@ public class Inventory : MonoBehaviour
     }
     public void AddLightPotion()
     {
-
+        LightPotion potion = (LightPotion)Instantiate(items[2]);
+        AddItem(potion);
+    }
+    public void AddLargeBag()
+    {
+        Bag bag = (Bag)Instantiate(items[0]);
+        bag.Initialize(16);
+        AddItem(bag);
     }
     public void AddSmallBag()
     {
-
+        Bag bag = (Bag)Instantiate(items[0]);
+        bag.Initialize(8);
+        AddItem(bag);
     }
     public void AddSoftScales()
     {

@@ -21,6 +21,7 @@ TextureImporter:
     21300032: 831574043c4a86e8df4c220dfe9cb996_16
     21300034: 831574043c4a86e8df4c220dfe9cb996_17
     21300036: 831574043c4a86e8df4c220dfe9cb996_18
+    21300038: bullet
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -186,8 +187,8 @@ TextureImporter:
       name: 831574043c4a86e8df4c220dfe9cb996_4
       rect:
         serializedVersion: 2
-        x: 16
-        y: 630
+        x: 13
+        y: 629
         width: 240
         height: 68
       alignment: 0
@@ -478,6 +479,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3264d066ed5694548804c90c9717e151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bullet
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 654
+        width: 30
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cbf5f3182cb3c44bad07d041d0d0ed0
       vertices: []
       indices: 
       edges: []

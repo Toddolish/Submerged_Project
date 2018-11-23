@@ -9,8 +9,12 @@ public class AddForce : MonoBehaviour {
     float dirY;
     float torque;
 
-	// Use this for initialization
-	void Start () {
+    #region Destroy
+    float destroyTimer;
+    #endregion
+
+    // Use this for initialization
+    void Start () {
         dirX = Random.Range(-5, 5);
         dirY = Random.Range(-5, 6);
         torque = Random.Range(-5, 10);
@@ -22,7 +26,13 @@ public class AddForce : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        destroyTimer += Time.deltaTime;
+
+        if(destroyTimer > 10)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
