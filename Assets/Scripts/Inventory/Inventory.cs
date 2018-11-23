@@ -116,11 +116,6 @@ public class Inventory : MonoBehaviour
 			bag.Initialize(8);
 			AddItem(bag);
 		}
-		if (Input.GetKeyDown(KeyCode.L))
-		{
-			HealthPotion potion = (HealthPotion)Instantiate(items[1]);
-			AddItem(potion);
-		}
 
 		if (Input.GetKeyDown(KeyCode.P))
 		{
@@ -239,5 +234,30 @@ public class Inventory : MonoBehaviour
 			}
 		}
 	}
+    #region AddItems
+    public void AddHealthPotion()
+    {
+        HealthPotion potion = (HealthPotion)Instantiate(items[1]);
+        AddItem(potion);
+    }
+    public void AddLightPotion()
+    {
+
+    }
+    public void AddSmallBag()
+    {
+
+    }
+    public void AddSoftScales()
+    {
+        Misc softScales = (Misc)Instantiate(items[3]);
+        AddItem(softScales);
+    }
+    public void AddSoftMeat()
+    {
+        Meat softMeat = (Meat)Instantiate(items[4]);
+        AddItem(softMeat);
+    }
+    #endregion
 
 }

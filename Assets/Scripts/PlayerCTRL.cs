@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerCTRL : MonoBehaviour
 {
-    public Camera cam;
-
     #region Sub_Vehicle
+    public Camera cam;
     public float forwardSpeed = 10;
     public float reverseSpeed = 3;
     public float rotateSpeed = 15;
@@ -29,39 +28,24 @@ public class PlayerCTRL : MonoBehaviour
     //particles, camera, speeds
     public ParticleSystem bubbleTrail;
     public ParticleSystem bubbleTrail2;
-	
-	//Scripts
+
+    //Scripts
     PlayerCTRL thisScript;
-    PlayerSTATS StatsScript;
-	
+    PlayerStats StatsScript;
+
     //text
     //public Text ToggleLights;
     #endregion
-    
+
     void Start()
     {
-		Driven = true;
-		//other
-		//diverTrans = GameObject.Find("Diver").GetComponent<Transform>();
-		subCollider = GetComponent<Collider2D>();
+        subCollider = GetComponent<Collider2D>();
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         #region SubMarine
         //SubAnim = GameObject.Find("Sub").GetComponent<Animator>();
         sub = GetComponent<GameObject>();
         myrb = gameObject.GetComponent<Rigidbody2D>();
         SubTransform = GetComponent<Transform>();
-        SubTrans = this.GetComponentsInChildren<Transform>();
-        foreach (Transform t in SubTrans)
-        {
-            if (t.gameObject.name == "Diver")
-            {
-                GetComponent<Transform>();
-            }
-            if (t.gameObject.name == "EnterText")
-            {
-                GetComponent<GameObject>();
-            }
-        }
         #endregion
 
         //Text
@@ -69,33 +53,35 @@ public class PlayerCTRL : MonoBehaviour
 
         //scripts
         thisScript = GetComponent<PlayerCTRL>();
-        StatsScript = GetComponent<PlayerSTATS>();
-		
+
     }
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Pickup items and add them to inventory
+        if (collision.tag == "hpp")
+        {
+            Destroy(collision.gameObject);
+            // spawn item of tag into bag
+            Inventory.MyInstance.AddHealthPotion();
+        }
+        if (collision.tag == "ss")
+        {
+            Destroy(collision.gameObject);
+            // spawn item of tag into bag
+            Inventory.MyInstance.AddSoftScales();
+        }
+        if (collision.tag == "sm")
+        {
+            Destroy(collision.gameObject);
+            // spawn item of tag into bag
+            Inventory.MyInstance.AddSoftMeat();
+        }
+    }
+
     void FixedUpdate()
     {
-        if (Driven == true)
-        {
-            myrb.freezeRotation = false;
-            //ToggleLights.enabled = true;
-            foreach (Transform t in SubTrans)
-            {
-                if(t.gameObject.name == "Spot")
-                    {
-                        enabled = true;
-                    }
-                if (t.gameObject.name == "Glow")
-                    {
-                        enabled = true;
-                    }
-                if (t.gameObject.name == "Back")
-                    {
-                        enabled = true;
-                    }
-            }
-            subCollider.isTrigger = false;
-        }
+        //ToggleLights.enabled = true;
+        subCollider.isTrigger = false;
         MouseRotationMovement();
         Flip();
     }
@@ -124,23 +110,6 @@ public class PlayerCTRL : MonoBehaviour
             {
                 transform.localScale = new Vector3(transform.localScale.x, -1, transform.localScale.z);
             }
-        }
-    }
-
-    void CastRay()
-    {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Pressed left click, casting ray.");
-            CastRay();
-        }
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
-        if (hit.collider != null)
-        {
-            //move our player to what we hit.
-            //stop focusing any objects;
         }
     }
     void MouseRotationMovement()

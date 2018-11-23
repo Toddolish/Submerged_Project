@@ -60,11 +60,11 @@ public abstract class Item : ScriptableObject, IMoveable, IDescribable
 				break;
 
 			case Quality.Uncommon:
-				color = "#00ff00ff";
+				color = "#00d605";
 				break;
 
 			case Quality.Rare:
-				color = "#0000ffff";
+				color = "#00d8ff";
 				break;
 
 			case Quality.Epic:

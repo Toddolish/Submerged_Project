@@ -8,11 +8,11 @@ public class HealthPotion : Item, IUseable
 	public int health;
 	public void Use()
 	{
-		if (Player.MyInstance.curHealth < Player.MyInstance.maxHealth)
+		if (PlayerStats.MyInstance.curHealth < PlayerStats.MyInstance.maxHealth)
 		{
 			Remove();
 
-			Player.MyInstance.curHealth += health;
+			PlayerStats.MyInstance.curHealth += health;
 		}
 	}
 

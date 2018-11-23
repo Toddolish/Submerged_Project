@@ -9,6 +9,9 @@ TagManager:
   - bulb
   - bullet
   - Submarine
+  - hpp
+  - sm
+  - ss
   layers:
   - Default
   - TransparentFX
@@ -46,6 +49,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MidGround
+    uniqueID: 1339482453
+    locked: 0
   - name: Submarine
     uniqueID: 336554177
+    locked: 0
+  - name: Fish
+    uniqueID: 540095221
     locked: 0
