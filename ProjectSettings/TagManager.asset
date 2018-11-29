@@ -13,6 +13,10 @@ TagManager:
   - sm
   - ss
   - lp
+  - db
+  - pp
+  - weapon
+  - BossFish
   layers:
   - Default
   - TransparentFX
@@ -58,4 +62,7 @@ TagManager:
     locked: 0
   - name: Fish
     uniqueID: 540095221
+    locked: 0
+  - name: Player
+    uniqueID: 2810954363
     locked: 0

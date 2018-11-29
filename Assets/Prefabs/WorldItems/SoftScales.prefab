@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58578621759000292}
   - component: {fileID: 50572658271867950}
   - component: {fileID: 70083648702117930}
+  - component: {fileID: 114074698563186006}
   m_Layer: 0
   m_Name: SoftScales
   m_TagString: ss
@@ -93,6 +94,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.0070541245}
   m_Size: {x: 0.20999998, y: 0.22589175}
   m_Direction: 0
+--- !u!114 &114074698563186006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787901135056072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b531727a800fb71459cf179344ce6562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 300
 --- !u!212 &212349836369060132
 SpriteRenderer:
   m_ObjectHideFlags: 1

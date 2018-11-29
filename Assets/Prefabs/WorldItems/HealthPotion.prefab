@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58281781301489828}
   - component: {fileID: 50309490397946142}
   - component: {fileID: 70584894239005710}
+  - component: {fileID: 114000160905107792}
   m_Layer: 0
   m_Name: HealthPotion
   m_TagString: hpp
@@ -93,6 +94,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.0070541245}
   m_Size: {x: 1.57, y: 0.0001}
   m_Direction: 0
+--- !u!114 &114000160905107792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1961448171176756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b531727a800fb71459cf179344ce6562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 300
 --- !u!212 &212918052312379216
 SpriteRenderer:
   m_ObjectHideFlags: 1

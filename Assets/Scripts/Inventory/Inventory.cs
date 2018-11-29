@@ -252,6 +252,11 @@ public class Inventory : MonoBehaviour
         Meat softMeat = (Meat)Instantiate(items[4]);
         AddItem(softMeat);
     }
-    #endregion
+	public void AddPowerPotion()
+	{
+		PowerPotion powerPotion = (PowerPotion)Instantiate(items[5]);
+		AddItem(powerPotion);
+	}
+	#endregion
 
 }

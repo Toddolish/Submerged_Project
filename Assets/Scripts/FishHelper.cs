@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class FishHelper : MonoBehaviour
 {
-    FishAI fish;
-
-    private void Start()
+	public void AttackPlayer()
     {
-        fish = transform.GetComponentInParent<FishAI>();
-    }
-    public void AttackPlayer()
-    {
-        PlayerStats.MyInstance.TakeDamage(fish.attackDamage);
+		PlayerStats.MyInstance.TakeDamage(FishAI.MyInstance.attackDamage);
     }
 }

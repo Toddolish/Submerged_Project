@@ -13,9 +13,18 @@ public class CamFollow : MonoBehaviour
         cam = this.gameObject.GetComponent<Camera>();
         OffsetSub = transform.position - SubTarget.transform.position;
     }
-
-    void Update()
+	private void Update()
+	{
+		if (PlayerCTRL.MyInstance.isGameOver)
+		{
+			SubTarget = null;
+		}
+	}
+	void LateUpdate()
     {
-        transform.position = SubTarget.transform.position + new Vector3(-1, -0.69f, -30);
+		if (SubTarget != null)
+		{
+			transform.position = SubTarget.transform.position + new Vector3(-1, -0.69f, -20);
+		}
     }
 }

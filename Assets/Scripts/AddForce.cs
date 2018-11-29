@@ -11,6 +11,7 @@ public class AddForce : MonoBehaviour {
 
     #region Destroy
     float destroyTimer;
+	public float destroyTime = 10f;
     #endregion
 
     // Use this for initialization
@@ -30,7 +31,7 @@ public class AddForce : MonoBehaviour {
     {
         destroyTimer += Time.deltaTime;
 
-        if(destroyTimer > 10)
+        if(destroyTimer > destroyTime)
         {
             Destroy(gameObject);
         }
