@@ -53,7 +53,8 @@ GameObject:
   - component: {fileID: 50760706547000040}
   - component: {fileID: 95411231218478088}
   - component: {fileID: 60524782096943928}
-  - component: {fileID: 114013092292797334}
+  - component: {fileID: 114135041205199342}
+  - component: {fileID: 114241812268606442}
   m_Layer: 11
   m_Name: DiamondMiner
   m_TagString: Fish
@@ -275,7 +276,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267110294905930}
   m_LocalRotation: {x: -0, y: -0, z: 0.12971765, w: 0.99155104}
-  m_LocalPosition: {x: -5.9460173, y: -2.342761, z: 0.7}
+  m_LocalPosition: {x: -25.66, y: -1.43, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4346097790177432}
@@ -373,7 +374,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.3, y: 0.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -385,19 +386,29 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.036871, y: 0.5578527}
-      - {x: 1.5958138, y: 0.70635986}
-      - {x: 1.0116141, y: 0.8640761}
-      - {x: 0.2534732, y: 0.6476791}
-      - {x: -0.08814899, y: 0.49504974}
-      - {x: -0.28542843, y: 0.18844344}
-      - {x: -0.34974542, y: -0.17712401}
-      - {x: 0.6348483, y: -0.40704986}
-      - {x: 1.1894007, y: -0.31002778}
-      - {x: 1.7752445, y: -0.012310482}
-      - {x: 2.0870025, y: 0.12523213}
-      - {x: 2.4074247, y: 0.17730701}
-      - {x: 2.3393805, y: 0.597952}
+    - - {x: 2.187097, y: 1.0458869}
+      - {x: 1.5019543, y: 1.4218397}
+      - {x: 0.6282357, y: 1.6363188}
+      - {x: -0.44207808, y: 1.239009}
+      - {x: -1.3878489, y: 0.800415}
+      - {x: -1.8723016, y: 0.64306265}
+      - {x: -2.3058636, y: 1.0672084}
+      - {x: -2.4091568, y: 1.2158939}
+      - {x: -2.5272367, y: 1.2453927}
+      - {x: -3.0867205, y: 1.6725384}
+      - {x: -3.2234724, y: 0.4425308}
+      - {x: -3.1558537, y: -0.7548654}
+      - {x: -1.5978286, y: 0.024531953}
+      - {x: -0.42206055, y: -0.44831893}
+      - {x: 0.15492725, y: -0.79887676}
+      - {x: 0.91846806, y: -1.2805768}
+      - {x: 1.3937008, y: -1.2183181}
+      - {x: 1.7938154, y: -0.63339335}
+      - {x: 2.145804, y: -0.37496677}
+      - {x: 2.3425448, y: -0.28804126}
+      - {x: 2.6006892, y: -0.20031771}
+      - {x: 3.5691917, y: 0.19298077}
+      - {x: 3.308909, y: 0.8069607}
 --- !u!95 &95411231218478088
 Animator:
   serializedVersion: 3
@@ -407,7 +418,7 @@ Animator:
   m_GameObject: {fileID: 1267110294905930}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb315b2f4c762de43823a1ed54babd03, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -453,7 +464,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114013092292797334
+--- !u!114 &114135041205199342
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -464,11 +475,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca98382a7920b9d4e99bb3c757320adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: 5
-  MovementSpeed: 10
-  Fish: {fileID: 1267110294905930}
+  rotateSpeed: 3
+  movementSpeed: 4
+  originalSpeed: 4
   target: {fileID: 0}
   curHealth: 0
+  maxHealth: 1000
   Meats:
   - {fileID: 1628585722916460, guid: 8012995e92da53a4e98405f60e95a602, type: 2}
   - {fileID: 1960136422734192, guid: 43a0d96208a12ec4a9e35e0337c1efef, type: 2}
@@ -477,7 +489,22 @@ MonoBehaviour:
   - {fileID: 1336452141102280, guid: c8fcd9961c450194db557d50ad145e58, type: 2}
   - {fileID: 1354029551185894, guid: 6534fe87903f7024687d3e01a951ce53, type: 2}
   - {fileID: 1093311997919720, guid: 528461e49736ff24789741ceb59c600f, type: 2}
-  attackDamage: 10
+  attackDamage: 20
+  boss: 1
+  anim: {fileID: 95411231218478088}
+  dashSpeed: 15
+  dashing: 0
+--- !u!114 &114241812268606442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267110294905930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea9beef4da622e419ecc23b20c7c5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212031379143481524
 SpriteRenderer:
   m_ObjectHideFlags: 1

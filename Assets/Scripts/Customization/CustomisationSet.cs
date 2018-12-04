@@ -6,25 +6,29 @@ using UnityEngine.SceneManagement;
 public class CustomisationSet : MonoBehaviour {
 
     #region Variables
+    [Header("Sprite Renderer List")]
+    public SpriteRenderer[] parts;
     [Header("Texture List")]
-    // Texture2D List for skin,hair, mouth, eyes
-    public List<Texture2D> Head = new List<Texture2D>();
-    public List<Texture2D> hair = new List<Texture2D>();
-    public List<Texture2D> mouth = new List<Texture2D>();
-    public List<Texture2D> eyes = new List<Texture2D>();
-    public List<Texture2D> weapon = new List<Texture2D>();
-    public List<Texture2D> armour = new List<Texture2D>();
+    // Sprite List for skin,hair, mouth, eyes
+    public List<Sprite> head = new List<Sprite>();
+    public List<Sprite> hair = new List<Sprite>();
+    public List<Sprite> mouth = new List<Sprite>();
+    public List<Sprite> eyes = new List<Sprite>();
+	public List<Sprite> eyebrows = new List<Sprite>();
+	public List<Sprite> weapon = new List<Sprite>();
+    public List<Sprite> armour = new List<Sprite>();
+    public List<Sprite> boots = new List<Sprite>();
+    public List<Sprite> shoulder = new List<Sprite>();
+    public List<Sprite> arm = new List<Sprite>();
+    public List<Sprite> belt = new List<Sprite>();
     [Header("Index")]
     // index numbers for our current skin, hair, mouth, eyes textures
-    public int skinIndex;
-    public int hairIndex, mouthIndex, eyesIndex, clothesIndex, armourIndex;
-    [Header("Renderer")]
-    // renderer for our character mesh so we can reference a material list
-    public Renderer character;
+    public int headIndex;
+    public int hairIndex, mouthIndex, eyesIndex, armourIndex, shoulderIndex, beltIndex, armIndex, bootsIndex, eyebrowsIndex;
     [Header("Max Index")]
     // max amount of skin, hair, mouth, eyes textures that our lists are filling with
-    public int skinMaxIndex;
-    public int hairMaxIndex, mouthMaxIndex, eyesMaxIndex, clothesMaxIndex, armourMaxIndex;
+    public int eyebrowsMaxIndex;
+    public int hairMaxIndex, mouthMaxIndex, eyesMaxIndex, armourMaxIndex, shoulderMaxIndex, beltMaxIndex, armMaxIndex, bootsMaxIndex, headMaxIndex;
     [Header("Character Name")]
     // name of our character that the user is making
     public string charName = "Adventurer";
@@ -50,109 +54,121 @@ public class CustomisationSet : MonoBehaviour {
     {
         statArray = new string[] { "Strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
         selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
-        #region for loop to pull textures from file
-        //for loop looping from 0 to less than the max amount of skin textures we need
-        for (int i = 0; i < skinMaxIndex; i++)
+		#region for loop to pull textures from file
+		//for loop looping from 0 to less than the max amount of skin textures we need
+		for (int i = 0; i < headMaxIndex; i++)
+		{
+			//creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Skin_#
+			Sprite temp = Resources.Load("Character/Head_" + i) as Sprite;
+			head.Add(temp);
+			//add our temp texture that we just found to the skin List
+		}
+		//for loop looping from 0 to less than the max amount of skin textures we need
+		for (int i = 0; i < eyebrowsMaxIndex; i++)
         {
-            //creating a temp Texture2D that it grabs using Resources.Load from the Character File looking for Skin_#
-            Texture2D temp = Resources.Load("Character/Skin_" + i) as Texture2D;
-            Head.Add(temp);
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Skin_#
+            Sprite temp = Resources.Load("Character/Eyebrows_" + i) as Sprite;
+            eyebrows.Add(temp);
             //add our temp texture that we just found to the skin List
         }
         //for loop looping from 0 to less than the max amount of hair textures we need
         for (int i = 0; i < hairMaxIndex; i++)
         {
-            //creating a temp Texture2D that it grabs using Resources.Load from the Character File looking for Hair_#
-            Texture2D temp = Resources.Load("Character/Hair_" + i) as Texture2D;
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Hair_#
+            Sprite temp = Resources.Load("Character/Hair_" + i) as Sprite;
             //add our temp texture that we just found to the hair List
             hair.Add(temp);
         }
         //for loop looping from 0 to less than the max amount of mouth textures we need    
         for (int i = 0; i < mouthMaxIndex; i++)
         {
-            //creating a temp Texture2D that it grabs using Resources.Load from the Character File looking for Mouth_#
-            Texture2D temp = Resources.Load("Character/Mouth_" + i) as Texture2D;
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Mouth_#
+            Sprite temp = Resources.Load("Character/Mouth_" + i) as Sprite;
             //add our temp texture that we just found to the mouth List
             mouth.Add(temp);
         }
         //for loop looping from 0 to less than the max amount of eyes textures we need
         for (int i = 0; i < eyesMaxIndex; i++)
         {
-            //creating a temp Texture2D that it grabs using Resources.Load from the Character File looking for Eyes_#
-            Texture2D temp = Resources.Load("Character/Eyes_" + i) as Texture2D;
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Eyes_#
+            Sprite temp = Resources.Load("Character/Eyes_" + i) as Sprite;
             //add our temp texture that we just found to the eyes List  
             eyes.Add(temp);
-        }
-        //for loop looping from 0 to less than the max amount of clothes textures we need
-        for (int i = 0; i < clothesMaxIndex ; i++)
-        {
-            //creating a temp Texture2D that it grabs using Resources.Load from the Character File looking for Clothes_#
-            Texture2D temp = Resources.Load("Character/Clothes_" + i) as Texture2D;
-            //add our temp texture that we just found to the clothes List  
-            weapon.Add(temp);
         }
         //for loop looping from 0 to less than the max amount of armour textures we need
         for (int i = 0; i < armourMaxIndex ; i++)
         {
-            //creating a temp Texture2D that it grabs using Resources.Load from the Character File looking for Armour_#
-            Texture2D temp = Resources.Load("Character/Armour_" + i) as Texture2D;
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
+            Sprite temp = Resources.Load("Character/Armour_" + i) as Sprite;
             //add our temp texture that we just found to the armour List  
             armour.Add(temp);
         }
-        #endregion
-
-        // connect and find the SkinnedMeshRenderer thats in the scene to the variable we made for Renderer
-        character = GameObject.Find("Mesh").GetComponent<SkinnedMeshRenderer>();
-
-        #region do this after making the function SetTexture
-        //SetTexture skin, hair, mouth, eyes to the first texture 0
-        SetTexture("Skin", 0);
-        SetTexture("Hair", 0);
-        SetTexture("Mouth", 0);
-        SetTexture("Eyes", 0);
-        SetTexture("Clothes", 0);
-        SetTexture("Armour", 0);
-        #endregion
-        character = GameObject.Find("Mesh").GetComponent<SkinnedMeshRenderer>();
-        SetTexture("Skin", 0);
-        SetTexture("Hair", 0);
-        SetTexture("Mouth", 0);
-        SetTexture("Eyes", 0);
-        SetTexture("Clothes", 0);
-        SetTexture("Armour", 0);
-        ChooseClass(selectedIndex);
-    }
+        // shoudler
+        for (int i = 0; i < shoulderMaxIndex; i++)
+        {
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
+            Sprite temp = Resources.Load("Character/Armour_Shoulder_" + i) as Sprite;
+            //add our temp texture that we just found to the armour List  
+            shoulder.Add(temp);
+        }
+        // arm
+        for (int i = 0; i < armMaxIndex; i++)
+        {
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
+            Sprite temp = Resources.Load("Character/Armour_Arm_" + i) as Sprite;
+            //add our temp texture that we just found to the armour List  
+            arm.Add(temp);
+        }
+        // belt
+        for (int i = 0; i < beltMaxIndex; i++)
+        {
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
+            Sprite temp = Resources.Load("Character/Armour_Belt_" + i) as Sprite;
+            //add our temp texture that we just found to the armour List  
+            belt.Add(temp);
+        }
+        // boots
+        for (int i = 0; i < bootsMaxIndex; i++)
+        {
+            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
+            Sprite temp = Resources.Load("Character/Armour_Boots_" + i) as Sprite;
+            //add our temp texture that we just found to the armour List  
+            boots.Add(temp);
+        }
+		#endregion
+		#region do this after making the function SetTexture
+		//SetTexture skin, hair, mouth, eyes to the first texture 0
+		SetTexture("Haid", 0, parts[9]);
+		SetTexture("Hair", 0, parts[1]);
+		SetTexture("Mouth", 0, parts[2]);
+		SetTexture("Eyes", 0, parts[0]);
+		SetTexture("Eyebrows", 0, parts[8]);
+		//armour peices
+		SetTexture("Armour", 0, parts[3]);
+		SetTexture("Shoulder", 0, parts[4]);
+		SetTexture("Boots", 0, parts[5]);
+		SetTexture("Arm", 0, parts[6]);
+		SetTexture("Belt", 0, parts[7]);
+		ChooseClass(selectedIndex);
+		#endregion
+	}
     #endregion
 
     #region SetTexture
-    void SetTexture(string type, int dir)
+    void SetTexture(string type, int dir, SpriteRenderer renderer)
     {
         //we need variables that exist only within this function
         //Create a function that is called SetTexture it should contain a string and int
         //the string is the name of the material we are editing, the int is the direction we are changing
-        //these are ints index numbers, max numbers, material index and Texture2D array of textures
-        int index = 0, max = 0, matIndex = 0;
-        Texture2D[] textures = new Texture2D[0];
+        //these are ints index numbers, max numbers, material index and Sprite array of textures
+        int index = 0, max = 0;
+        Sprite[] textures = new Sprite[0];
         //inside a switch statement that is swapped by the string name of our material
 
         #region Switch Material
         switch (type)
         {
-            //case skin
-            case "Skin":
-                //index is the same as our skin index
-                index = skinIndex;
-                //max is the same as our skin max
-                max = skinMaxIndex;
-                //textures is our skin list .ToArray()
-                textures = Head.ToArray();
-                //material index element number is 1
-                matIndex = 1;
-                //break
-                break;
-            //now repeat for each material 
-
-            //hair is 2
+            //hair is 1
             case "Hair":
                 //index is the same as our index
                 index = hairIndex;
@@ -160,8 +176,6 @@ public class CustomisationSet : MonoBehaviour {
                 max = hairMaxIndex;
                 //textures is our list .ToArray()
                 textures = hair.ToArray();
-                //material index element number is 2
-                matIndex = 2;
                 //break
                 break;
 
@@ -173,8 +187,6 @@ public class CustomisationSet : MonoBehaviour {
                 max = mouthMaxIndex;
                 //textures is our list .ToArray()
                 textures = mouth.ToArray();
-                //material index element number is 3
-                matIndex = 3;
                 //break
                 break;
 
@@ -186,21 +198,6 @@ public class CustomisationSet : MonoBehaviour {
                 max = eyesMaxIndex;
                 //textures is our list .ToArray()
                 textures = eyes.ToArray();
-                //material index element number is 4
-                matIndex = 4;
-                //break
-                break;
-
-            //clothes are 5
-            case "Clothes":
-                //index is the same as our index
-                index = clothesIndex;
-                //max is the same as our max
-                max = clothesMaxIndex;
-                //textures is our list .ToArray()
-                textures = weapon.ToArray();
-                //material index element number is 5
-                matIndex = 5;
                 //break
                 break;
 
@@ -212,11 +209,75 @@ public class CustomisationSet : MonoBehaviour {
                 max = armourMaxIndex;
                 //textures is our list .ToArray()
                 textures = armour.ToArray();
-                //material index element number is 6
-                matIndex = 6;
                 //break
                 break;
-        }
+
+            //Armour is 7
+            case "Shoulder":
+                //index is the same as our index
+                index = shoulderIndex;
+                //max is the same as our max
+                max = shoulderMaxIndex;
+                //textures is our list .ToArray()
+                textures = shoulder.ToArray();
+                //break
+                break;
+
+            //Armour is 8
+            case "Belt":
+                //index is the same as our index
+                index = beltIndex;
+                //max is the same as our max
+                max = beltMaxIndex;
+                //textures is our list .ToArray()
+                textures = belt.ToArray();
+                //break
+                break;
+
+            //Armour is 9
+            case "Arm":
+                //index is the same as our index
+                index = armIndex;
+                //max is the same as our max
+                max = armMaxIndex;
+                //textures is our list .ToArray()
+                textures = arm.ToArray();
+                //break
+                break;
+
+            //Armour is 10
+            case "Boots":
+                //index is the same as our index
+                index = bootsIndex;
+                //max is the same as our max
+                max = bootsMaxIndex;
+                //textures is our list .ToArray()
+                textures = boots.ToArray();
+                //break
+                break;
+				
+			//eyes are 8
+			case "Eyebrows":
+				//index is the same as our index
+				index = eyebrowsIndex;
+				//max is the same as our max
+				max = eyebrowsMaxIndex;
+				//textures is our list .ToArray()
+				textures = eyebrows.ToArray();
+				//break
+				break;
+
+			//eyes are 8
+			case "Head":
+				//index is the same as our index
+				index = headIndex;
+				//max is the same as our max
+				max = headMaxIndex;
+				//textures is our list .ToArray()
+				textures = head.ToArray();
+				//break
+				break;
+		}
         #endregion
         #region OutSide Switch
         //outside our switch statement
@@ -231,25 +292,13 @@ public class CustomisationSet : MonoBehaviour {
         {
             index = 0;
         }
-        //Material array is equal to our characters material list
-        Material[] mat = character.materials;
         //our material arrays current material index's main texture is equal to our texture arrays current index
-        mat[matIndex].mainTexture = textures[index];
-        //our characters materials are equal to the material array
-        character.materials = mat;
-        //create another switch that is goverened by the same string name of our material
+        renderer.sprite = textures[index];
 
         #endregion
         #region Set Material Switch
         switch (type)
         {
-            //case skin
-            case "Skin":
-                //skin index equals our index
-                skinIndex = index;
-                //break
-                break;
-
             //case hair
             case "Hair":
                 //index equals our index
@@ -271,12 +320,12 @@ public class CustomisationSet : MonoBehaviour {
                 //break
                 break;
 
-            //case clothes
-            case "Clothes":
-                //index equals our index
-                clothesIndex = index;
-                //break
-                break;
+			//case eyes
+			case "Eyesbrows":
+				//index equals our index
+				eyebrowsIndex = index;
+				//break
+				break;
 
             //case armour
             case "Armour":
@@ -284,7 +333,42 @@ public class CustomisationSet : MonoBehaviour {
                 armourIndex = index;
                 //break
                 break;
-        }
+
+            //case armour
+            case "Shoulder":
+                //index equals our index
+                shoulderIndex = index;
+                //break
+                break;
+
+            //case armour
+            case "Belt":
+                //index equals our index
+                beltIndex = index;
+                //break
+                break;
+
+            //case armour
+            case "Arm":
+                //index equals our index
+                armIndex = index;
+                //break
+                break;
+
+            //case armour
+            case "Boots":
+                //index equals our index
+                bootsIndex = index;
+                //break
+                break;
+
+			//case head
+			case "Head":
+				//index equals our index
+				headIndex = index;
+				//break
+				break;
+		}
         #endregion
     }
     #endregion
@@ -292,13 +376,16 @@ public class CustomisationSet : MonoBehaviour {
     #region Save
     public void Save() // Function called Save this will allow us to save our indexes to PlayerPrefs
     {
-        // SetInt for SkinIndex, HairIndex, MouthIndex, EyesIndex, ClothesIndex, ArmourIndex
-        PlayerPrefs.SetInt("SkinIndex", skinIndex);
+        PlayerPrefs.SetInt("HeadIndex", headIndex);
         PlayerPrefs.SetInt("HairIndex", hairIndex);
         PlayerPrefs.SetInt("MouthIndex", mouthIndex);
         PlayerPrefs.SetInt("EyesIndex", eyesIndex);
-        PlayerPrefs.SetInt("ClothesIndex", clothesIndex);
+		PlayerPrefs.SetInt("EyebrowsIndex", eyebrowsIndex);
         PlayerPrefs.SetInt("ArmourIndex", armourIndex);
+        PlayerPrefs.SetInt("ShoulderIndex", shoulderIndex);
+        PlayerPrefs.SetInt("ArmIndex", armIndex);
+        PlayerPrefs.SetInt("BeltIndex", beltIndex);
+        PlayerPrefs.SetInt("BootsIndex", bootsIndex);
 
         // SetString CharacterName
         PlayerPrefs.SetString("CharacterName", charName);
@@ -322,22 +409,22 @@ public class CustomisationSet : MonoBehaviour {
         float scrH = Screen.height/9;
         // create an int that will help with shuffling your GUI elements under eachother
         int i = 1;
-        #region Skin
+        #region Head
         //GUI button on the left of the screen with the contence <
         if (GUI.Button(new Rect(0.25f*scrW, scrH+ i*(0.5f*scrH),0.5f*scrW, 0.5f*scrH), "<"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Skin", - 1);
+            SetTexture("Head", - 1, parts[9]);
         }
 
         //GUI Box or Lable on the left of the screen with the contence Skin
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), 1f * scrW, 0.5f * scrH), "Skin");
+        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), 1f * scrW, 0.5f * scrH), "Head");
 
         //GUI button on the left of the screen with the contence >
         if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Skin", 1);
+            SetTexture("Head", 1, parts[9]);
         }
         //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  1
         //move down the screen with the int using ++ each grouping of GUI elements are moved using this
@@ -348,7 +435,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.55f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Hair", -1);
+            SetTexture("Hair", -1, parts[1]);
         }
 
         //GUI Box or Lable on the left of the screen with the contence Skin
@@ -358,7 +445,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.55f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Hair", 1);
+            SetTexture("Hair", 1, parts[1]);
         }
         //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  1
         //move dow
@@ -368,7 +455,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.85f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Mouth", -1);
+            SetTexture("Mouth", -1, parts[2]);
         }
 
         //GUI Box or Lable on the left of the screen with the contence Skin
@@ -378,7 +465,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.85f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Mouth", 1);
+            SetTexture("Mouth", 1, parts[2]);
         }
         //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  1
         //move dow
@@ -388,7 +475,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (1.15f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Eyes", -1);
+            SetTexture("Eyes", -1, parts[0]);
         }
 
         //GUI Box or Lable on the left of the screen with the contence Skin
@@ -398,25 +485,25 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (1.15f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Eyes", 1);
+            SetTexture("Eyes", 1, parts[0]);
         }
         #endregion
-        #region Clothes
+        #region Eyebrows
         //GUI button on the left of the screen with the contence <
         if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (1.45f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Clothes", -1);
+            SetTexture("Eyebrows", -1, parts[8]);
         }
 
         //GUI Box or Lable on the left of the screen with the contence Skin
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (1.45f * scrH), 1f * scrW, 0.5f * scrH), "Clothes");
+        GUI.Box(new Rect(0.75f * scrW, scrH + i * (1.45f * scrH), 1f * scrW, 0.5f * scrH), "Eyebrows");
 
         //GUI button on the left of the screen with the contence >
         if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (1.45f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Clothes", 1);
+            SetTexture("Eyebrows", 1, parts[8]);
         }
         #endregion
         #region Armour
@@ -424,7 +511,11 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (1.75f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Armour", -1);
+            SetTexture("Armour", -1, parts[3]);
+            SetTexture("Shoulder", -1, parts[4]);
+            SetTexture("Boots", -1, parts[5]);
+            SetTexture("Arm", -1, parts[6]);
+            SetTexture("Belt", -1, parts[7]);
         }
 
         //GUI Box or Lable on the left of the screen with the contence Skin
@@ -434,31 +525,43 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (1.75f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  
-            SetTexture("Armour", 1);
+            SetTexture("Armour", 1, parts[3]);
+            SetTexture("Shoulder", 1, parts[4]);
+            SetTexture("Boots", 1, parts[5]);
+            SetTexture("Arm", 1, parts[6]);
+            SetTexture("Belt", 1, parts[7]);
         }
         #endregion
         #region Random Reset
         // create 2 buttons one Random and one Reset
         if (GUI.Button(new Rect(0.20f * scrW, scrH + i * (2.05f * scrH), 1.05f * scrW, 0.5f * scrH), "Random"))
         {
-            // Random will feed a random amount to the direction 
-            SetTexture("Skin",Random.Range(0, skinMaxIndex - 1));
-            SetTexture("Mouth", Random.Range(0, mouthMaxIndex - 1));
-            SetTexture("Hair", Random.Range(0, hairMaxIndex - 1));
-            SetTexture("Eyes", Random.Range(0, eyesMaxIndex - 1));
-            SetTexture("Clothes", Random.Range(0, clothesMaxIndex - 1));
-            SetTexture("Armour", Random.Range(0, armourMaxIndex - 1));
+			// Random will feed a random amount to the direction 
+			SetTexture("Head", Random.Range(0, headMaxIndex - 1), parts[9]);
+			SetTexture("Mouth", Random.Range(0, mouthMaxIndex - 1), parts[2]);
+            SetTexture("Hair", Random.Range(0, hairMaxIndex - 1), parts[1]);
+            SetTexture("Eyes", Random.Range(0, eyesMaxIndex - 1), parts[0]);
+            SetTexture("Eyebrows", Random.Range(0, eyebrowsMaxIndex - 1), parts[8]);
+            SetTexture("Armour", Random.Range(0, armourMaxIndex - 1), parts[3]);
+            SetTexture("Shoulder", Random.Range(0, shoulderMaxIndex - 1), parts[4]);
+            SetTexture("Boots", Random.Range(0, bootsMaxIndex - 1), parts[5]);
+            SetTexture("Arm", Random.Range(0, armMaxIndex - 1), parts[6]);
+            SetTexture("Belt", Random.Range(0, beltMaxIndex - 1), parts[7]);
 
         }
         // reset will set all to 0 both use SetTexture
         if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (2.05f * scrH), 1.1f * scrW, 0.5f * scrH), "Reset"))
         {
-            SetTexture("Skin", skinIndex = 0);
-            SetTexture("Mouth", mouthIndex = 0);
-            SetTexture("Hair", hairIndex = 0);
-            SetTexture("Eyes", eyesIndex = 0);
-            SetTexture("Clothes", clothesIndex = 0);
-            SetTexture("Armour", armourIndex = 0);
+			SetTexture("Head", headIndex = 0, parts[9]);
+			SetTexture("Mouth", mouthIndex = 0, parts[2]);
+            SetTexture("Hair", hairIndex = 0, parts[1]);
+            SetTexture("Eyes", eyesIndex = 0, parts[0]);
+			SetTexture("Eyebrows", eyebrowsIndex = 0, parts[8]);
+			SetTexture("Armour", armourIndex = 0, parts[3]);
+            SetTexture("Shoulder", shoulderIndex = 0, parts[4]);
+            SetTexture("Boots", bootsIndex = 0, parts[5]);
+            SetTexture("Arm", armIndex = 0, parts[6]);
+            SetTexture("Belt", beltIndex = 0, parts[7]);
         }
         //move down the screen with the int using ++ each grouping of GUI elements are moved using this
         i++;
@@ -469,7 +572,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(0.05f * scrW, scrH + i * (2.30f * scrH), 2f * scrW, 0.5f * scrH), "Save & Play") && points == 0)
         {
             Save();
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
         //GUI Button called Save and Play
         //this button will run the save function and also load into the game level

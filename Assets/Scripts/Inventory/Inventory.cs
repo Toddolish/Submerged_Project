@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
 
 	private void Awake()
 	{
-		Bag bag = (Bag)Instantiate(items[0]);
+        Bag bag = (Bag)Instantiate(items[0]);
 		bag.Initialize(16);
 		bag.Use();
 	}
@@ -134,8 +134,11 @@ public class Inventory : MonoBehaviour
 		bags.Remove(bag);
 		Destroy(bag.MyBagScript.gameObject);
 	}
-
-	public void SwapBags(Bag oldBag, Bag newBag)
+    private void Start()
+    {
+        Inventory.MyInstance.OpenClose();
+    }
+    public void SwapBags(Bag oldBag, Bag newBag)
 	{
 		int newSlotCount = (MyTotalSlotCount - oldBag.Slots) + newBag.Slots;
 

@@ -56,6 +56,9 @@ public class PlayerCTRL : MonoBehaviour
 	[Header("Bubble Trail Particle")]
 	public ParticleSystem bubbleTrail;
 	public ParticleSystem bubbleTrail2;
+
+	public GameObject spawner;
+	public GameObject character;
 	#endregion
 	#region Special
 	// Light Potion
@@ -94,6 +97,27 @@ public class PlayerCTRL : MonoBehaviour
 		SpecialLight();
 		PowerGain();
 		//SelectWeapon(weaponIndex);
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			//Destroy fish
+			GameObject[] fish = GameObject.FindGameObjectsWithTag("Fish");
+			for (int i = 0; i < fish.Length; i++)
+			{
+				Destroy(fish[i]);
+			}
+			// Switch to character
+
+			character.SetActive(true);
+			PlayerStats.MyInstance.enabled = false;
+			Weapon.MyInstance.enabled = false;
+			// Change camera target to submarine
+			CamFollow.MyInstance.followingSub = false;
+			CamFollow.MyInstance.followingChar = true;
+			// Start the waves
+			spawner.SetActive(false);
+			// Set this gameobject active to false
+			thisScript.enabled = false;
+		}
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
