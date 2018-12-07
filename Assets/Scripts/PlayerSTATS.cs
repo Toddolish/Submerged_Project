@@ -35,6 +35,7 @@ public class PlayerStats : MonoBehaviour
     public Image exp_Bar;
     public int level = 0;
     public Text levelText;
+    public ParticleSystem levelParticle;
     #endregion
     #region Stats
     [Header("STATS")]
@@ -76,9 +77,7 @@ public class PlayerStats : MonoBehaviour
         Wisdom = PlayerPrefs.GetInt("Wisdom", 10);
         Intelligence = PlayerPrefs.GetInt("Intelligence", 10);
         Charisma = PlayerPrefs.GetInt("Charisma", 10);
-
         maxHealth += Strength * 1f;
-
         statArray = new string[] { "Strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
         #endregion
     }
@@ -86,15 +85,18 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         #region Health
-        hp_Bar.fillAmount = curHealth / 100;
+        hp_Bar.fillAmount = Map(curHealth, 0, maxHealth, 0, 1);
         #endregion
         #region Exp
         levelText.text = level.ToString();
-        exp_Bar.fillAmount = curExp / maxExp;
+        exp_Bar.fillAmount = Map(curExp, 0, maxExp, 0, 1);
         if (curExp >= maxExp)
         {
             //Enable levelUp button
             LevelButton.SetActive(true);
+
+            // play particle
+            levelParticle.Play();
 
             //then the current experience is equal to our experience minus the maximum amount of experience
             curExp -= maxExp;
@@ -103,7 +105,7 @@ public class PlayerStats : MonoBehaviour
             level++;
             points += 3;
             curHealth = maxHealth;
-
+        
             //the maximum amount of experience is increased by 50
             maxExp = maxExp + 20;
         }
@@ -155,7 +157,7 @@ public class PlayerStats : MonoBehaviour
             if (GUI.Button(new Rect(3.75f * scrW, 2.5f * scrH + 6 * (0.5f * scrH), 2f * scrW, 0.5f * scrH), "Apply") && points == 0)
             {
                 Time.timeScale = 1;
-
+                maxHealth += Strength * 1f;
                 Strength += tempStats[0];
                 Dexterity += tempStats[1];
                 Constitution += tempStats[2];
@@ -181,5 +183,9 @@ public class PlayerStats : MonoBehaviour
         LevelButton.SetActive(false);
         // Enable stat Window
         showStatWindow = true;
+    }
+    private float Map(float value, float inMin, float inMax, float outMin, float outMax)
+    {
+        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 }
