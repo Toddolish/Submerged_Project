@@ -8,6 +8,19 @@ public class CustomisationGet : MonoBehaviour
 {
     [Header("Sprite Renderer List")]
     public SpriteRenderer[] parts;
+    [Header("Texture List")]
+    // Sprite List for skin,hair, mouth, eyes
+    public List<Sprite> head = new List<Sprite>();
+    public List<Sprite> hair = new List<Sprite>();
+    public List<Sprite> mouth = new List<Sprite>();
+    public List<Sprite> eyes = new List<Sprite>();
+    public List<Sprite> eyebrows = new List<Sprite>();
+    public List<Sprite> weapon = new List<Sprite>();
+    public List<Sprite> armour = new List<Sprite>();
+    public List<Sprite> boots = new List<Sprite>();
+    public List<Sprite> shoulder = new List<Sprite>();
+    public List<Sprite> arm = new List<Sprite>();
+    public List<Sprite> belt = new List<Sprite>();
     #region Start
     private void Start()
     {
@@ -29,22 +42,12 @@ public class CustomisationGet : MonoBehaviour
         }
         //if it does have a save file then load and SetTexture Skin, Hair, Mouth and Eyes from PlayerPrefs
         // SetTexture("Skin", PlayerPrefs.GetInt("SkinIndex"),parts[0]);
-        /*
-         //SetTexture("Skin", 0, );
-         SetTexture("Hair", 0, parts[1]);
-         SetTexture("Mouth", 0, parts[2]);
-         SetTexture("Eyes", 0, parts[0]);
-         //armour peices
-         SetTexture("Armour", 0, parts[3]);
-         SetTexture("Shoulder", 0, parts[4]);
-         SetTexture("Boots", 0, parts[5]);
-         SetTexture("Arm", 0, parts[6]);
-         SetTexture("Belt", 0, parts[7]);
-         */
+     
+        SetTexture("Head",0, parts[9]);
         SetTexture("Hair", PlayerPrefs.GetInt("HairIndex"), parts[1]);
         SetTexture("Eyes", PlayerPrefs.GetInt("EyesIndex"), parts[0]);
         SetTexture("Mouth", PlayerPrefs.GetInt("MouthIndex"), parts[2]);
-        SetTexture("Eyebrows", PlayerPrefs.GetInt("EyebrowIndex"), parts[1]);
+        SetTexture("Eyebrows", PlayerPrefs.GetInt("EyebrowIndex"), parts[8]);
         SetTexture("Armour", PlayerPrefs.GetInt("ArmourIndex"), parts[3]);
         SetTexture("Shoulder", PlayerPrefs.GetInt("ShoulderIndex"), parts[4]);
         SetTexture("Arm", PlayerPrefs.GetInt("ArmIndex"), parts[6]);
@@ -52,6 +55,8 @@ public class CustomisationGet : MonoBehaviour
         SetTexture("Boots", PlayerPrefs.GetInt("BootsIndex"), parts[5]);
         //grab the gameObject in scene that is our character and set its Object name to the Characters name
         gameObject.name = PlayerPrefs.GetString("CharacterName");
+
+    
     }
 
     #endregion
@@ -68,68 +73,62 @@ public class CustomisationGet : MonoBehaviour
         switch (type)
         {
             // Case Skin
-            case "Skin":
+            case "Head":
                 //textures is our Resource.Load Character Skin save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Skin_" + dir.ToString()) as Sprite;
+                tex = head[dir];
                 //material index element number is 1
                 break;
 
             // Case Hair
             case "Hair":
                 //textures is our Resource.Load Character Hair save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Hair_" + dir.ToString()) as Sprite;
+                tex = hair[dir];
                 //material index element number is 2
                 break;
 
             // Case Mouth
             case "Mouth":
                 //textures is our Resource.Load Character Mouth save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Mouth_" + dir.ToString()) as Sprite;
+                tex = mouth[dir];
                 //material index element number is 4
                 break;
 
             // Case Eyes
             case "Eyes":
                 //textures is our Resource.Load Character Eyes save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Eyes_" + dir.ToString()) as Sprite;
+                tex = eyes[dir];
                 //material index element number is 3
-                break;
-
-            // Case Clothes
-            case "Clothes":
-                //textures is our Resource.Load Character Clothes save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Clothes_" + dir.ToString()) as Sprite;
-                //material index element number is 5
                 break;
 
             // Case Armour
             case "Armour":
                 //textures is our Resource.Load Character Armour save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Armour_" + dir.ToString()) as Sprite;
+                tex = armour[dir];
                 //material index element number is 6
                 break;
 
             case "Boots":
                 //textures is our Resource.Load Character Armour save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Armour_Boots_" + dir.ToString()) as Sprite;
+                tex = boots[dir];
                 //material index element number is 6
                 break;
 
             case "Shoulder":
                 //textures is our Resource.Load Character Armour save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Armour_Shoulder_" + dir.ToString()) as Sprite;
+                tex = shoulder[dir];
                 //material index element number is 6
                 break;
 
             case "Arm":
                 //textures is our Resource.Load Character Armour save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Armour_Arm_" + dir.ToString()) as Sprite;
+                tex = arm[dir];
                 //material index element number is 6
                 break;
 
             case "Belt":
                 //textures is our Resource.Load Character Armour save index we loaded in set as our Sprite
-                tex = Resources.Load("Character/Armour_Belt_" + dir.ToString()) as Sprite;
+                tex = belt[dir];
+
                 //material index element number is 6
                 break;
         }

@@ -54,91 +54,13 @@ public class CustomisationSet : MonoBehaviour {
     {
         statArray = new string[] { "Strength", "Dexterity", "Constitution", "Wisdom", "Intelligence", "Charisma" };
         selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
-		#region for loop to pull textures from file
-		//for loop looping from 0 to less than the max amount of skin textures we need
-		for (int i = 0; i < headMaxIndex; i++)
-		{
-			//creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Skin_#
-			Sprite temp = Resources.Load("Character/Head_" + i) as Sprite;
-			head.Add(temp);
-			//add our temp texture that we just found to the skin List
-		}
-		//for loop looping from 0 to less than the max amount of skin textures we need
-		for (int i = 0; i < eyebrowsMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Skin_#
-            Sprite temp = Resources.Load("Character/Eyebrows_" + i) as Sprite;
-            eyebrows.Add(temp);
-            //add our temp texture that we just found to the skin List
-        }
-        //for loop looping from 0 to less than the max amount of hair textures we need
-        for (int i = 0; i < hairMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Hair_#
-            Sprite temp = Resources.Load("Character/Hair_" + i) as Sprite;
-            //add our temp texture that we just found to the hair List
-            hair.Add(temp);
-        }
-        //for loop looping from 0 to less than the max amount of mouth textures we need    
-        for (int i = 0; i < mouthMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Mouth_#
-            Sprite temp = Resources.Load("Character/Mouth_" + i) as Sprite;
-            //add our temp texture that we just found to the mouth List
-            mouth.Add(temp);
-        }
-        //for loop looping from 0 to less than the max amount of eyes textures we need
-        for (int i = 0; i < eyesMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Eyes_#
-            Sprite temp = Resources.Load("Character/Eyes_" + i) as Sprite;
-            //add our temp texture that we just found to the eyes List  
-            eyes.Add(temp);
-        }
-        //for loop looping from 0 to less than the max amount of armour textures we need
-        for (int i = 0; i < armourMaxIndex ; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
-            Sprite temp = Resources.Load("Character/Armour_" + i) as Sprite;
-            //add our temp texture that we just found to the armour List  
-            armour.Add(temp);
-        }
-        // shoudler
-        for (int i = 0; i < shoulderMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
-            Sprite temp = Resources.Load("Character/Armour_Shoulder_" + i) as Sprite;
-            //add our temp texture that we just found to the armour List  
-            shoulder.Add(temp);
-        }
-        // arm
-        for (int i = 0; i < armMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
-            Sprite temp = Resources.Load("Character/Armour_Arm_" + i) as Sprite;
-            //add our temp texture that we just found to the armour List  
-            arm.Add(temp);
-        }
-        // belt
-        for (int i = 0; i < beltMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
-            Sprite temp = Resources.Load("Character/Armour_Belt_" + i) as Sprite;
-            //add our temp texture that we just found to the armour List  
-            belt.Add(temp);
-        }
-        // boots
-        for (int i = 0; i < bootsMaxIndex; i++)
-        {
-            //creating a temp Sprite that it grabs using Resources.Load from the Character File looking for Armour_#
-            Sprite temp = Resources.Load("Character/Armour_Boots_" + i) as Sprite;
-            //add our temp texture that we just found to the armour List  
-            boots.Add(temp);
-        }
-		#endregion
-		#region do this after making the function SetTexture
-		//SetTexture skin, hair, mouth, eyes to the first texture 0
-		SetTexture("Haid", 0, parts[9]);
+        #region for loop to pull textures from file
+
+        #endregion
+
+        #region do this after making the function SetTexture
+        //SetTexture skin, hair, mouth, eyes to the first texture 0
+        SetTexture("Head", 0, parts[9]);
 		SetTexture("Hair", 0, parts[1]);
 		SetTexture("Mouth", 0, parts[2]);
 		SetTexture("Eyes", 0, parts[0]);
@@ -292,7 +214,7 @@ public class CustomisationSet : MonoBehaviour {
         {
             index = 0;
         }
-        //our material arrays current material index's main texture is equal to our texture arrays current index
+        //Our material arrays current material index's main texture is equal to our texture arrays current index
         renderer.sprite = textures[index];
 
         #endregion
@@ -321,7 +243,7 @@ public class CustomisationSet : MonoBehaviour {
                 break;
 
 			//case eyes
-			case "Eyesbrows":
+			case "Eyebrows":
 				//index equals our index
 				eyebrowsIndex = index;
 				//break
@@ -572,7 +494,7 @@ public class CustomisationSet : MonoBehaviour {
         if (GUI.Button(new Rect(0.05f * scrW, scrH + i * (2.30f * scrH), 2f * scrW, 0.5f * scrH), "Save & Play") && points == 0)
         {
             Save();
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         //GUI Button called Save and Play
         //this button will run the save function and also load into the game level

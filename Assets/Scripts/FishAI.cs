@@ -43,8 +43,9 @@ public class FishAI : MonoBehaviour
 	Text hp_Text;
 
 	[Header("EXPLODE")]
-	public GameObject[] Meats;
-	int Burst = 5;
+	public GameObject[] meats;
+    public GameObject[] randomDrops;
+    int Burst = 5;
 
 	[Header("ATTACK")]
 	public int attackDamage = 10;
@@ -58,11 +59,15 @@ public class FishAI : MonoBehaviour
 	public float dashSpeed;
 	public bool dashing;
 	float dashTimer;
+
+    int randomIndex;
+    
 	#endregion
 	private void Start()
 	{
-		//PlayerScript = GameObject.Find("Player").GetComponent<Submarine>();
-		target = GameObject.Find("Submarine").GetComponent<Transform>();
+        randomIndex = Random.Range(0, 2);
+        //PlayerScript = GameObject.Find("Player").GetComponent<Submarine>();
+        target = GameObject.Find("Submarine").GetComponent<Transform>();
 		myRb = gameObject.transform.GetComponent<Rigidbody2D>();
 		myTransform = gameObject.GetComponent<Transform>();
 		myAnim = transform.GetChild(0).GetComponent<Animator>();
@@ -175,10 +180,15 @@ public class FishAI : MonoBehaviour
 		{
 			// Fish will explode
 			// Instanciate all fish parts
-			for (int i = 0; i < Meats.Length; i++)
+			for (int i = 0; i < meats.Length; i++)
 			{
-				Instantiate(Meats[i], transform.position, transform.rotation);
+				Instantiate(meats[i], transform.position, transform.rotation);
 			}
+            for (int i = 0; i < randomDrops.Length; i++)
+            {
+                i = randomIndex;
+                Instantiate(randomDrops[randomIndex], transform.position, transform.rotation);
+            }
 			Destroy(this.gameObject);
 		}
 	}

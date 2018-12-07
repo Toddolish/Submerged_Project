@@ -23,6 +23,7 @@ public class PlayerCTRL : MonoBehaviour
 	#endregion
 	#region Sub_Vehicle
 	public Camera cam;
+    public GameObject menu;
 	[Header("SPEED")]
 	public float forwardSpeed = 10;
 	public float reverseSpeed = 3;
@@ -79,7 +80,8 @@ public class PlayerCTRL : MonoBehaviour
 	#endregion
 	void Start()
 	{
-		subCollider = GetComponent<Collider2D>();
+        menu.SetActive(false);
+        subCollider = GetComponent<Collider2D>();
 		cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 		#region SubMarine
 		//SubAnim = GameObject.Find("Sub").GetComponent<Animator>();
@@ -96,8 +98,9 @@ public class PlayerCTRL : MonoBehaviour
 		GameOver();
 		SpecialLight();
 		PowerGain();
-		//SelectWeapon(weaponIndex);
-		if (Input.GetKeyDown(KeyCode.E))
+        //SelectWeapon(weaponIndex);
+        #region Exiting Sub
+        /*if (Input.GetKeyDown(KeyCode.E)) ///////// I wont be using this anymore as i feel once player enters the submarine game will start
 		{
 			//Destroy fish
 			GameObject[] fish = GameObject.FindGameObjectsWithTag("Fish");
@@ -117,9 +120,10 @@ public class PlayerCTRL : MonoBehaviour
 			spawner.SetActive(false);
 			// Set this gameobject active to false
 			thisScript.enabled = false;
-		}
-	}
-	private void OnTriggerEnter2D(Collider2D collision)
+		}*/
+        #endregion
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
 		#region AddItems
 		// Pickup items and add them to inventory
@@ -282,7 +286,9 @@ public class PlayerCTRL : MonoBehaviour
 		{
 			PlayerStats.MyInstance.curHealth = 0;
 			isGameOver = true;
-		}
+            // Enable menu
+            menu.SetActive(true);
+        }
 		if(isGameOver)
 		{
 			for (int i = 0; i < subParts.Length; i++)

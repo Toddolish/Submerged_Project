@@ -148,6 +148,7 @@ MonoBehaviour:
   bulletSpeed: 50
   damage: 50
   weaponFireRate: 20
+  superBullet: 1
 --- !u!212 &212239042585606084
 SpriteRenderer:
   m_ObjectHideFlags: 1

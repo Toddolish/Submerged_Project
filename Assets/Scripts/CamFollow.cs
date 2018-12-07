@@ -50,7 +50,7 @@ public class CamFollow : MonoBehaviour
 	}
 	void LateUpdate()
 	{
-		FollowCharacter();
+		//FollowCharacter();
 		FollowSubmarine();
 		if (!followingSub)
 		{

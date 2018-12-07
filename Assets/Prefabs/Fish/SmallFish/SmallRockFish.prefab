@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287151176500986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.410736, y: -0.91308796, z: 0.24416445}
+  m_LocalPosition: {x: 6.360923, y: -3.5711057, z: 0.24416445}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4794045213740556}
@@ -215,14 +215,16 @@ MonoBehaviour:
   target: {fileID: 0}
   curHealth: 0
   maxHealth: 100
-  Meats:
-  - {fileID: 1374738228896278, guid: 9c5a6407bfcc08c429579252f144c72b, type: 2}
-  - {fileID: 1542161514538512, guid: 112511f7669d7df41a9d5b3daf153d9c, type: 2}
-  - {fileID: 1591196013308114, guid: ad0e974a6d964124ab0d16582a01c6b4, type: 2}
-  - {fileID: 1651497722914596, guid: 3e7b182c942a3e9468a5720fe2a881a7, type: 2}
+  meats:
   - {fileID: 1722595233706646, guid: b3d1b0c76a136b642bcb2cbcf32f6ba1, type: 2}
-  - {fileID: 1785895160927460, guid: 4ab101a04a7302a4ea792c4f61fe34cb, type: 2}
-  - {fileID: 1787901135056072, guid: c25c87df9daf43b4b9a5066ab736fe52, type: 2}
+  - {fileID: 1651497722914596, guid: 3e7b182c942a3e9468a5720fe2a881a7, type: 2}
+  - {fileID: 1591196013308114, guid: ad0e974a6d964124ab0d16582a01c6b4, type: 2}
+  - {fileID: 1542161514538512, guid: 112511f7669d7df41a9d5b3daf153d9c, type: 2}
+  - {fileID: 1374738228896278, guid: 9c5a6407bfcc08c429579252f144c72b, type: 2}
+  - {fileID: 1961448171176756, guid: 83d770e1bb2a986498aae778b27fdfba, type: 2}
+  randomDrops:
+  - {fileID: 1758030444885478, guid: 30953d0f2f6e68f46a4acaf78928fdbe, type: 2}
+  - {fileID: 1947633771503794, guid: 87241725d86dbf5419b3a3a4a62f431a, type: 2}
   - {fileID: 1961448171176756, guid: 83d770e1bb2a986498aae778b27fdfba, type: 2}
   attackDamage: 10
   boss: 0

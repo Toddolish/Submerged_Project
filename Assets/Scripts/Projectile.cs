@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 	public float bulletSpeed;
 	public int damage;
 	public float weaponFireRate;
+    public bool superBullet;
 	#region Destroy
 	float destroyTimer;
 
@@ -32,10 +33,17 @@ public class Projectile : MonoBehaviour
 			FishAI fishScript = collision.gameObject.GetComponent<FishAI>();
 			if (fishScript != null)
 			{
+                PlayerStats.MyInstance.curExp += 5;
 				fishScript.DamageFish(damage);
 				Destroy(gameObject);
 			}
-		}
+            if (fishScript != null && superBullet)
+            {
+                PlayerStats.MyInstance.curExp += 20;
+                fishScript.DamageFish(damage);
+                Destroy(gameObject);
+            }
+        }
 	}
 
 	private void Destroy()
