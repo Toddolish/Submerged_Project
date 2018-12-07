@@ -188,6 +188,7 @@ public class FishAI : MonoBehaviour
             {
                 i = randomIndex;
                 Instantiate(randomDrops[randomIndex], transform.position, transform.rotation);
+                break;
             }
 			Destroy(this.gameObject);
 		}

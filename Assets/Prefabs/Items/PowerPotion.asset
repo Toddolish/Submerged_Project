@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: PowerPotion
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e41985af79169c84387399a9865ff67f, type: 3}
-  stackSize: 1
+  stackSize: 5
   title: Power Potion
   quality: 3
   Seconds: 20
